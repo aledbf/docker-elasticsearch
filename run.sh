@@ -1,11 +1,9 @@
 #!/bin/sh
 
 # provision elasticsearch user
-addgroup sudo
-adduser -D -g '' elasticsearch
-adduser elasticsearch sudo
+adduser --disabled-password --gecos "" elasticsearch
+usermod -a -G sudo elasticsearch
 chown -R elasticsearch /elasticsearch /data
-echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # set environment
 export CLUSTER_NAME=${CLUSTER_NAME:-elasticsearch-default}
